@@ -17,19 +17,29 @@ var stringifyJSON = function(obj) {
   	};
   	if (Array.isArray(obj)) {
   	  var content = obj.reduce(function(accumulator,item){
-  	  	return accumulator + stringifyJSON(item) + ","
-  	  },"")
-  	  return "[" + content.slice(0,-1) + "]"
+  	  	if ((typeof item == "undefined") || (typeof item == "function")) { // I should theoretically factor out the undefined/funciton check into a separate funciton since I use it three ties
+  	  		return accumulator;
+  	  	}
+  	  	return accumulator + stringifyJSON(item) + ",";
+  	  },"");
+  	  return "[" + content.slice(0,-1) + "]";
   	} else {
   	  var content = "";
   	  for (key in obj) {
-  	  	content += stringifyJSON(key) + ":" + stringifyJSON(obj[key]) + ",";
-  	  }
-  	  return "{" + content.slice(0,-1) + "}"
-  	}
+  	  	//console.log(typeof obj[key])
+  	  	//console.log(typeof (obj[key]) != ("undefined" || "function"))
+  	  	if ((typeof obj[key] != "undefined") && (typeof obj[key] != "function")) {
+  	  	  content += stringifyJSON(key) + ":" + stringifyJSON(obj[key]) + ",";
+  	  	}
+  	  };
+  	  return "{" + content.slice(0,-1) + "}";
+  	};
   };
   if (typeof obj == "string") {
   	return '"' + obj + '"'
-  }
-  return obj.toString()
+  };
+  if ((typeof obj == "undefined") || (typeof obj == "function")) {
+  	return "";
+  };
+  return obj.toString();
 };
