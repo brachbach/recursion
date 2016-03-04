@@ -3,7 +3,7 @@ var validStrings, invalidStrings, // used for stringifyJSON and parseJSON specs
 
 var stringifiableObjects = [
   9,
-  /*null,
+  null,
   true,
   false,
   "Hello world",
@@ -22,7 +22,7 @@ var stringifiableObjects = [
   {"a":{"b":"c"}},
   {"a":["b", "c"]},
   [{"a":"b"}, {"c":"d"}],
-  {"a":[],"c": {}, "b": true}*/
+  {"a":[],"c": {}, "b": true}
 ];
 
 // used for stringifyJSON spec
