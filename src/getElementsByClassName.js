@@ -11,6 +11,15 @@
 //equivalent to return $(document).find('.' + className);. Clearly find makes this trivial!
 //however, funny enough, the test suite says that the perverse instantiation fails the test. Not sure why...
 //need to make sure not to commit the changes to the test suite
+
+//should try redownloading the test suite if I still have trouble
+
+//I think basically what I want to do is create the results array, 
+//use recursion to drill down through the DOM, adding any matching elements 
+//to the results array as I go. 
+//Potentially somehow using jQuery to get the child nodes at each level, then .each
+
+//the recursion itself here should be fairly "empty", just a means to drill drown
 var getElementsByClassName = function(className) {
   return document.getElementsByClassName(className);
 };
