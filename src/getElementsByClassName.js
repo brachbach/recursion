@@ -24,6 +24,9 @@
 //playing with this, you'll eventually drill down to [] if you keep taking children
 
 //would be good to clarify the difference between element and $(element)
+
+//NEED TO USE document.body, element.childNodes, and element.classList
+
 var getElementsByClassName = function(className) {
   var results = []
   function searchForElementsByClassName(element,className){
