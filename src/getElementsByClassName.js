@@ -28,19 +28,22 @@
 //NEED TO USE document.body, element.childNodes, and element.classList
 
 var getElementsByClassName = function(className) {
-  var results = []
   function searchForElementsByClassName(element,className){
-    var $element = $(element)
-    if ($element.hasClass(className)) {
-      results.push(element)
+    var classList = element.classList || false;
+    if (classList) {
+      if (classList.contains(className)) { //this isn't working; note that classList is a "DOM token list"
+        results.push(element)
+      }
     }
-    children = $($element.children())
+    var children = element.childNodes;
     if (children.length > 0) {
       $.each(children, function(index,value) {
         searchForElementsByClassName(value,className);
       });
     }
   };
-  searchForElementsByClassName(document,className);
+  var results = []
+  var body = document.body
+  searchForElementsByClassName(body,className);
   return results;
 };
