@@ -20,6 +20,24 @@
 //Potentially somehow using jQuery to get the child nodes at each level, then .each
 
 //the recursion itself here should be fairly "empty", just a means to drill drown
+
+//playing with this, you'll eventually drill down to [] if you keep taking children
+
+//would be good to clarify the difference between element and $(element)
 var getElementsByClassName = function(className) {
-  return document.getElementsByClassName(className);
+  var results = []
+  function searchForElementsByClassName(element,className){
+    var $element = $(element)
+    if ($element.hasClass(className)) {
+      results.push(element)
+    }
+    children = $($element.children())
+    if (children.length > 0) {
+      $.each(children, function(index,value) {
+        searchForElementsByClassName(value,className);
+      });
+    }
+  };
+  searchForElementsByClassName(document,className);
+  return results;
 };
